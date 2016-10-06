@@ -7,8 +7,6 @@ defmodule ParseClient.Requests do
 
   use HTTPoison.Base
 
-  @parse_url "https://api.parse.com/1/"
-
   @doc """
   Creates the URL for an endpoint (query).
 
@@ -19,7 +17,7 @@ defmodule ParseClient.Requests do
       "https://api.parse.com/1/classes/GameScore"
   """
   def process_url(endpoint) do
-    @parse_url <> endpoint
+    Application.get_env(:parse_client, :parse_url) <> endpoint
   end
 
   @doc """
