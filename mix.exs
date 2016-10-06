@@ -8,8 +8,8 @@ defmodule ParseClient.Mixfile do
   def project do
     [
       app: :parse_client,
-      version: "0.3.0",
-      elixir: "~> 1.0.0",
+      version: "0.3.1",
+      elixir: "~> 1.3",
       name: "Parse Client",
       description: @description,
       package: package,
@@ -24,8 +24,8 @@ defmodule ParseClient.Mixfile do
 
   defp deps do
     [
-      {:poison,   "~> 1.4.0"},
-      {:httpoison, "~> 0.7.0"},
+      {:poison,   "~> 2.2.0"},
+      {:httpoison, "~> 0.9.2"},
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc,  "~> 0.7", only: :dev}
     ]
