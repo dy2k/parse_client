@@ -76,9 +76,9 @@ defmodule ParseClient do
 
       ParseClient.get("classes/Animals", %{}, %{"order" => "createdAt"})
   """
-  def get(url, filters, options \\ %{}) do
+  def get(url, filters, options \\ %{}, httpoison_options \\ []) do
     filter_string = Req.parse_filters(filters, options)
-    Req.request!(:get, url <> "?" <> filter_string, "", get_headers)
+    Req.request!(:get, url <> "?" <> filter_string, "", get_headers, httpoison_options)
   end
 
   @doc """
@@ -102,7 +102,7 @@ defmodule ParseClient do
       body = %{"animal" => "parrot, "name" => "NorwegianBlue", "status" => 0}
       ParseClient.post("classes/Animals", body)
   """
-  def post(url, body), do: Req.request!(:post, url, body, post_headers)
+  def post(url, body, options \\ []), do: Req.request!(:post, url, body, post_headers, options)
 
   @doc """
   Request to update an object.
