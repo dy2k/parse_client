@@ -12,9 +12,9 @@ defmodule ParseClient.Mixfile do
       elixir: "~> 1.3",
       name: "Parse Client",
       description: @description,
-      package: package,
+      package: package(),
       source_url: "https://github.com/elixircnx/parse_elixir_client",
-      deps: deps
+      deps: deps()
     ]
   end
 
@@ -24,10 +24,10 @@ defmodule ParseClient.Mixfile do
 
   defp deps do
     [
-      {:poison,   "~> 2.2.0"},
-      {:httpoison, "~> 0.9.2"},
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc,  "~> 0.7", only: :dev}
+      {:poison,   "~> 2.0"},
+      {:httpoison, "~> 0.11"},
+      {:earmark, "~> 1.0", only: :dev},
+      {:ex_doc,  "~> 0.14", only: :dev}
     ]
   end
 

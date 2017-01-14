@@ -55,7 +55,7 @@ defmodule ParseClient.Requests do
   Options is also a map. Options include "order", "limit", "count" and "include".
   """
   def parse_filters(filters, options) when is_map(filters) and map_size(filters) > 0 do
-    %{where: Poison.encode!(filters)} |> Dict.merge(options) |> URI.encode_query
+    %{where: Poison.encode!(filters)} |> Map.merge(options) |> URI.encode_query
   end
 
   @doc """

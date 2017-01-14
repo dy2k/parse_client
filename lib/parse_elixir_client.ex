@@ -61,7 +61,7 @@ defmodule ParseClient do
   @doc """
   Get request for making queries.
   """
-  def get(url), do: Req.request!(:get, url, "", get_headers)
+  def get(url), do: Req.request!(:get, url, "", get_headers())
 
   @doc """
   Get request with filters.
@@ -78,7 +78,7 @@ defmodule ParseClient do
   """
   def get(url, filters, options \\ %{}, httpoison_options \\ []) do
     filter_string = Req.parse_filters(filters, options)
-    Req.request!(:get, url <> "?" <> filter_string, "", get_headers, httpoison_options)
+    Req.request!(:get, url <> "?" <> filter_string, "", get_headers(), httpoison_options)
   end
 
   @doc """
@@ -102,7 +102,7 @@ defmodule ParseClient do
       body = %{"animal" => "parrot, "name" => "NorwegianBlue", "status" => 0}
       ParseClient.post("classes/Animals", body)
   """
-  def post(url, body, options \\ []), do: Req.request!(:post, url, body, post_headers, options)
+  def post(url, body, options \\ []), do: Req.request!(:post, url, body, post_headers(), options)
 
   @doc """
   Request to update an object.
@@ -111,7 +111,7 @@ defmodule ParseClient do
 
       ParseClient.put("classes/Animals/12345678", %{"status" => 1})
   """
-  def put(url, body), do: Req.request!(:put, url, body, post_headers)
+  def put(url, body), do: Req.request!(:put, url, body, post_headers())
 
   @doc """
   Request to delete an object.
@@ -120,7 +120,7 @@ defmodule ParseClient do
 
       ParseClient.delete("classes/Animals/12345678")
   """
-  def delete(url), do: Req.request!(:delete, url, "", get_headers)
+  def delete(url), do: Req.request!(:delete, url, "", get_headers())
 
   @doc """
   Request from a user to signup. The user must provide a username
@@ -134,7 +134,7 @@ defmodule ParseClient do
       ParseClient.signup("Duchamp", "L_H;OO#Q", %{"email" => "eros@selavy.com"})
   """
   def signup(username, password, options \\ %{}) do
-    data = Dict.merge(%{"username" => username, "password" => password}, options)
+    data = Map.merge(%{"username" => username, "password" => password}, options)
     post("users", data).body
   end
 
@@ -193,6 +193,6 @@ defmodule ParseClient do
   end
 
   defp post_headers(key \\ "Content-Type", val \\ "application/json") do
-    Dict.put(get_headers, key, val)
+    Map.put(get_headers(), key, val)
   end
 end
